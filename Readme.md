@@ -4,7 +4,8 @@
 オリキャラ（OC）の作成や、二次創作、ロールプレイなどのデータ整理にご活用ください。
 
 ---
-<img width="1572" height="906" alt="ワールドトリガー_ _パラメータ" src="https://github.com/user-attachments/assets/fc113330-6041-4934-9e72-c9527b6eb10d" />
+<img width="1572" height="906" alt="ワールドトリガー_ _パラメータ" src="https://github.com/user-attachments/assets/0b45843b-3af0-4eee-8929-1b61aad8cde6" />
+
 
 
 ##  主な機能
