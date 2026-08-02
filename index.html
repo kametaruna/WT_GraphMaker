@@ -21,7 +21,7 @@
     
     <div class="form-group">
       <label for="charName">隊員名</label>
-      <input type="text" id="charName" value=" ">
+      <input type="text" id="charName" value="三雲 修">
     </div>
 
     <div class="form-group">
@@ -35,6 +35,19 @@
         <option value="トラッパー">トラッパー</option>
         <option value="オペレーター">オペレーター</option>
       </select>
+    </div>
+
+    <!-- 🔻 追加：ソロポイント＆対象トリガー入力欄 -->
+    <div class="solo-point-form-group">
+      <label>ソロポイント (最大2つまで指定可)</label>
+      <div class="solo-point-row">
+        <input type="text" id="soloTrig1" placeholder="トリガー名1 (例: 弧月)" value="レイガスト">
+        <input type="number" id="soloPt1" placeholder="pt" value="4500" min="0">
+      </div>
+      <div class="solo-point-row">
+        <input type="text" id="soloTrig2" placeholder="トリガー名2 (任意)" value="">
+        <input type="number" id="soloPt2" placeholder="pt" value="" min="0">
+      </div>
     </div>
 
     <div class="form-group">
@@ -63,13 +76,13 @@
 
     <h2 style="margin-top: 15px;">パラメータ (1~15)</h2>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-      <div class="form-group"><label>トリオン</label><input type="number" id="p-trion" min="1" max="15" value="5"></div>
-      <div class="form-group"><label>攻撃</label><input type="number" id="p-attack" min="1" max="15" value="5"></div>
-      <div class="form-group"><label>防御・支援</label><input type="number" id="p-defense" min="1" max="15" value="5"></div>
-      <div class="form-group"><label>機動</label><input type="number" id="p-mobility" min="1" max="15" value="5"></div>
-      <div class="form-group"><label>技術</label><input type="number" id="p-technique" min="1" max="15" value="5"></div>
-      <div class="form-group"><label>射程</label><input type="number" id="p-range" min="1" max="15" value="5"></div>
-      <div class="form-group"><label>指揮</label><input type="number" id="p-command" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>トリオン</label><input type="number" id="p-trion" min="1" max="15" value="2"></div>
+      <div class="form-group"><label>攻撃</label><input type="number" id="p-attack" min="1" max="15" value="6"></div>
+      <div class="form-group"><label>防御・支援</label><input type="number" id="p-defense" min="1" max="15" value="8"></div>
+      <div class="form-group"><label>機動</label><input type="number" id="p-mobility" min="1" max="15" value="4"></div>
+      <div class="form-group"><label>技術</label><input type="number" id="p-technique" min="1" max="15" value="7"></div>
+      <div class="form-group"><label>射程</label><input type="number" id="p-range" min="1" max="15" value="4"></div>
+      <div class="form-group"><label>指揮</label><input type="number" id="p-command" min="1" max="15" value="6"></div>
       <div class="form-group"><label>特殊戦術</label><input type="number" id="p-tactics" min="1" max="15" value="5"></div>
     </div>
 
@@ -80,7 +93,11 @@
   <div class="card-export-wrapper">
     <div class="panel card-display" id="cardToExport">
       <div class="character-header">
-        <div class="char-name-display" id="displayName">-</div>
+        <div>
+          <div class="char-name-display" id="displayName">三雲 修</div>
+          <!-- 🔻 追加：カード上に表示されるソロポイント枠 -->
+          <div class="display-solo-points" id="displaySoloPoints"></div>
+        </div>
         <div class="char-position-display" id="displayPosition">シューター</div>
       </div>
 
