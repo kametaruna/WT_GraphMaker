@@ -27,7 +27,7 @@
 
 ## 🚀 使い方
 
-1. 本リポジトリの [GitHub Pages URL](https://YOUR-USERNAME.github.io/YOUR-REPOSITORY-NAME/) にアクセスします。
+1. 本リポジトリの [GitHub Pages URL](https://kametaruna.github.io/WT_GraphMaker/) にアクセスします。
 2. 左側の入力フォームにて、**隊員名・ポジション・トリガー・パラメータ**を入力します。
 3. 「ファイルを選択」からお好みのキャラ画像をアップロードします（自動で適正サイズにトリミングされます）。
 4. 右側のプレビューカードを確認し、「📷 カード画像を出力 (PNG)」ボタンを押して画像を保存します。
