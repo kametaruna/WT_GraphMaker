@@ -40,6 +40,29 @@ function updateDisplay() {
   document.getElementById('displayName').textContent = document.getElementById('charName').value || '―';
   document.getElementById('displayPosition').textContent = document.getElementById('position').value;
 
+  // 🔻 ソロポイントの更新処理（最大2つまで）
+  const soloContainer = document.getElementById('displaySoloPoints');
+  soloContainer.innerHTML = '';
+
+  const trig1 = document.getElementById('soloTrig1').value.trim();
+  const pt1 = document.getElementById('soloPt1').value.trim();
+  const trig2 = document.getElementById('soloTrig2').value.trim();
+  const pt2 = document.getElementById('soloPt2').value.trim();
+
+  if (trig1 && pt1 !== '') {
+    const div = document.createElement('div');
+    div.className = 'solo-point-tag';
+    div.innerHTML = `${trig1}: <span>${Number(pt1).toLocaleString()} pt</span>`;
+    soloContainer.appendChild(div);
+  }
+
+  if (trig2 && pt2 !== '') {
+    const div = document.createElement('div');
+    div.className = 'solo-point-tag';
+    div.innerHTML = `${trig2}: <span>${Number(pt2).toLocaleString()} pt</span>`;
+    soloContainer.appendChild(div);
+  }
+
   // トリガーリスト更新
   const mainInputs = document.querySelectorAll('.main-trig');
   const subInputs = document.querySelectorAll('.sub-trig');
@@ -75,7 +98,6 @@ function updateDisplay() {
     parseInt(document.getElementById('p-tactics').value) || 0,
   ];
 
-  // ラベル側に数値を追加表記（例: 「トリオン: 2」）
   radarChart.data.labels = baseLabels.map((label, index) => `${label}: ${params[index]}`);
   radarChart.data.datasets[0].data = params;
   radarChart.update();
