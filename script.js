@@ -5,9 +5,9 @@ const ctx = document.getElementById('radarChart').getContext('2d');
 let radarChart = new Chart(ctx, {
   type: 'radar',
   data: {
-    labels: baseLabels.map(label => `${label}: 0`),
+    labels: baseLabels.map(label => `${label}: 5`),
     datasets: [{
-      data: [0, 0, 0, 0, 0, 0, 0, 0],
+      data: [5, 5, 5, 5, 5, 5, 5, 5],
       backgroundColor: 'rgba(0, 210, 255, 0.3)',
       borderColor: '#00d2ff',
       pointBackgroundColor: '#00d2ff',
@@ -40,7 +40,7 @@ function updateDisplay() {
   document.getElementById('displayName').textContent = document.getElementById('charName').value || '―';
   document.getElementById('displayPosition').textContent = document.getElementById('position').value;
 
-  // 🔻 ソロポイントの更新処理（最大2つまで）
+  // ソロポイントの更新処理
   const soloContainer = document.getElementById('displaySoloPoints');
   soloContainer.innerHTML = '';
 
