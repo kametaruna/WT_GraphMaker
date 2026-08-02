@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ワールドトリガー パラメータ＆トリガーセット生成器</title>
+
+  <!-- 外部CSSの読み込み -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 外部ライブラリ (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <!-- 入力フォーム -->
+  <div class="panel">
+    <h2>隊員データ入力</h2>
+    
+    <div class="form-group">
+      <label for="charName">隊員名</label>
+      <input type="text" id="charName" value=" ">
+    </div>
+
+    <div class="form-group">
+      <label for="position">ポジション</label>
+      <select id="position">
+        <option value="シューター">シューター</option>
+        <option value="アタッカー">アタッカー</option>
+        <option value="ガンナー">ガンナー</option>
+        <option value="スナイパー">スナイパー</option>
+        <option value="オールラウンダー">オールラウンダー</option>
+        <option value="トラッパー">トラッパー</option>
+        <option value="オペレーター">オペレーター</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>キャラ画像（自動適正リサイズ）</label>
+      <label for="imageInput" class="file-upload-btn">📁 画像を選択する</label>
+      <input type="file" id="imageInput" accept="image/*" style="display: none;">
+    </div>
+
+    <h2 style="margin-top: 15px;">トリガーセット</h2>
+    <div class="trigger-inputs">
+      <div>
+        <h3 class="main-title" style="font-size:0.8rem; margin-bottom:4px;">主起動 (MAIN)</h3>
+        <input type="text" class="main-trig" value="レイガスト" style="margin-bottom:4px;">
+        <input type="text" class="main-trig" value="スラスター" style="margin-bottom:4px;">
+        <input type="text" class="main-trig" value="スパイダー" style="margin-bottom:4px;">
+        <input type="text" class="main-trig" value="シールド" style="margin-bottom:4px;">
+      </div>
+      <div>
+        <h3 class="sub-title" style="font-size:0.8rem; margin-bottom:4px;">副起動 (SUB)</h3>
+        <input type="text" class="sub-trig" value="アステロイド" style="margin-bottom:4px;">
+        <input type="text" class="sub-trig" value="―" style="margin-bottom:4px;">
+        <input type="text" class="sub-trig" value="バッグワーム" style="margin-bottom:4px;">
+        <input type="text" class="sub-trig" value="シールド" style="margin-bottom:4px;">
+      </div>
+    </div>
+
+    <h2 style="margin-top: 15px;">パラメータ (1~15)</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <div class="form-group"><label>トリオン</label><input type="number" id="p-trion" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>攻撃</label><input type="number" id="p-attack" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>防御・支援</label><input type="number" id="p-defense" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>機動</label><input type="number" id="p-mobility" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>技術</label><input type="number" id="p-technique" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>射程</label><input type="number" id="p-range" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>指揮</label><input type="number" id="p-command" min="1" max="15" value="5"></div>
+      <div class="form-group"><label>特殊戦術</label><input type="number" id="p-tactics" min="1" max="15" value="5"></div>
+    </div>
+
+    <button type="button" class="export-btn" id="exportBtn">📷 カード画像を出力 (PNG)</button>
+  </div>
+
+  <!-- 出力対象カード -->
+  <div class="card-export-wrapper">
+    <div class="panel card-display" id="cardToExport">
+      <div class="character-header">
+        <div class="char-name-display" id="displayName">-</div>
+        <div class="char-position-display" id="displayPosition">シューター</div>
+      </div>
+
+      <div class="display-main-grid">
+        <!-- アバター -->
+        <div class="avatar-container">
+          <img id="avatarDisplay" class="avatar-img" alt="キャラ画像">
+          <div id="avatarPlaceholder" class="avatar-placeholder">NO IMAGE<br><span style="font-size:0.7rem; color:#527394;">(画像未選択)</span></div>
+        </div>
+
+        <!-- トリガー一覧 -->
+        <div>
+          <h2 style="font-size: 0.85rem; margin-bottom: 10px;">TRIGGER SET</h2>
+          <div class="trigger-set-container">
+            <div class="trigger-column main">
+              <h4 class="main-title">MAIN</h4>
+              <ul class="trigger-list" id="displayMainTriggers"></ul>
+            </div>
+            <div class="trigger-column sub">
+              <h4 class="sub-title">SUB</h4>
+              <ul class="trigger-list" id="displaySubTriggers"></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- パラメータチャート -->
+        <div class="radar-container">
+          <h2 style="font-size: 0.85rem; margin-bottom: 5px; width: 100%; text-align: center;">PARAMETERS</h2>
+          <canvas id="radarChart"></canvas>
+          <div class="total-score">TOTAL: <span id="totalScore">0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 自作JSファイルの読み込み -->
+<script src="script.js"></script>
+</body>
+</html>
